@@ -1,22 +1,23 @@
-import { UserProfile } from "./components/UserProfile";
+import UserDetails from "./components/UserDetails";
 
 export default function App() {
-    const callMe = () => {
-        console.log("helllo")
-    }
+  const users = [
+    {
+      id: 1,
+      username: "Abhi",
+      email: "abhi@gmail.com",
+    },
+    {
+      id: 2,
+      username: "Mike",
+      email:90,
+    },
+  ];
   return (
     <div>
-      <h1>Root Component</h1>
-      <UserProfile username="Abhi" age={20} isLoggedIn={false} favoriteFoods={[
-        {
-            name: "Sushi",
-            id: "sushi"
-        },
-        {
-            name: "Pizza",
-            id: "pizza"
-        },
-      ]} callMe={callMe} />
+      {users.map((user) => {
+        return <UserDetails key={user.id} user={user} />;
+      })}
     </div>
   );
-} 
+}
