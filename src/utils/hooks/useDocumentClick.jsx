@@ -13,6 +13,6 @@ export function useDocumentClick() {
     return () => {
       console.log("removing click event listener");
       document.removeEventListener('click', handleDocumentClick)
-    };
+    }; 
   }, []);
 }
