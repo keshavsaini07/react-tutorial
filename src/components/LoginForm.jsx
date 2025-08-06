@@ -1,4 +1,23 @@
+import { useEffect } from "react";
+import { useDocumentClick } from "../utils/hooks/useDocumentClick";
+
 export default function LoginForm() {
+  useEffect(() => {
+    const resizeEventHandler = () => {
+      console.log("Window Resized");
+    };
+    window.addEventListener("resize", resizeEventHandler);
+
+    return () => {
+      // cleanup function, it is called whenver a component is unmounted
+      console.log("unmounting login form");
+      console.log("removing resize event listener");
+      window.removeEventListener("resize", resizeEventHandler);
+    };
+  }, []);
+
+  useDocumentClick();
+
   return (
     <form
       onSubmit={(e) => {
@@ -6,13 +25,13 @@ export default function LoginForm() {
         const formData = new FormData(e.target);
         const username = formData.get("username");
         const password = formData.get("password");
-        fetch('/api/login', {
-            body: {
-                username,
-                password
-            },
-            method: "POST",
-        })
+        fetch("/api/login", {
+          body: {
+            username,
+            password,
+          },
+          method: "POST",
+        });
       }}
     >
       <label htmlFor="username">Username: </label>
